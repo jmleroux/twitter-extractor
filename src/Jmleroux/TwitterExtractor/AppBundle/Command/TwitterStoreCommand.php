@@ -36,13 +36,11 @@ class TwitterStoreCommand extends ContainerAwareCommand
 
         $reader = $this->getTwitterReader();
         $tweets = $reader->searchTags($hashtags);
-
-        $output->writeln(sprintf('Found tweets = %d', count($tweets)));
+        $this->write($output, sprintf('Found tweets = %d', count($tweets)));
 
         $saver = $this->getTwitterSaver();
         $countNew = $saver->saveAll($tweets);
-
-        $output->writeln(sprintf('<info>Done.</info>New tweets = %d', $countNew));
+        $this->write($output, sprintf('<info>Done.</info>New tweets = %d', $countNew));
 
         return 0;
     }
@@ -61,5 +59,12 @@ class TwitterStoreCommand extends ContainerAwareCommand
     private function getTwitterSaver()
     {
         return $this->getContainer()->get('jmleroux.twitter_extractor.saver');
+    }
+
+    private function write(OutputInterface $output, $message)
+    {
+        $output->writeln($message);
+        $logger = $this->getContainer()->get('logger');
+        $logger->addInfo($message);
     }
 }
