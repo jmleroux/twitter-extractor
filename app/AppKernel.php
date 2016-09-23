@@ -1,10 +1,15 @@
 <?php
 
+use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\Routing\RouteCollectionBuilder;
 
 class AppKernel extends Kernel
 {
+    use MicroKernelTrait;
+
     public function registerBundles()
     {
         $bundles = [
@@ -22,6 +27,11 @@ class AppKernel extends Kernel
         return $bundles;
     }
 
+    protected function configureContainer(ContainerBuilder $c, LoaderInterface $loader)
+    {
+        $loader->load(__DIR__ . '/config/config_' . $this->getEnvironment() . '.yml');
+    }
+
     public function getRootDir()
     {
         return __DIR__;
@@ -37,8 +47,7 @@ class AppKernel extends Kernel
         return dirname(__DIR__) . '/var/logs';
     }
 
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    protected function configureRoutes(RouteCollectionBuilder $routes)
     {
-        $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
     }
 }
