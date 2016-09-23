@@ -4,6 +4,9 @@ namespace Jmleroux\TwitterExtractor\Core;
 
 use TwitterAPIExchange;
 
+/**
+ * @author JM Leroux <jmleroux.pro@gmail.com>
+ */
 class TwitterReader
 {
     /**
@@ -11,11 +14,21 @@ class TwitterReader
      */
     protected $options;
 
+    /**
+     * TwitterReader constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options)
     {
         $this->options = $options;
     }
 
+    /**
+     * @param string[] $hastags
+     *
+     * @return array
+     */
     public function searchTags(array $hastags)
     {
         $tweets = [];
@@ -26,6 +39,11 @@ class TwitterReader
         return $tweets;
     }
 
+    /**
+     * @param string $search
+     *
+     * @return array
+     */
     public function search($search)
     {
         $url = 'https://api.twitter.com/1.1/search/tweets.json';

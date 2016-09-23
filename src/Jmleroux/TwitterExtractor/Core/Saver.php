@@ -2,6 +2,9 @@
 
 namespace Jmleroux\TwitterExtractor\Core;
 
+/**
+ * @author JM Leroux <jmleroux.pro@gmail.com>
+ */
 class Saver
 {
     /**

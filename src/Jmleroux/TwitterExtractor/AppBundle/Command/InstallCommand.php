@@ -4,21 +4,21 @@ namespace Jmleroux\TwitterExtractor\AppBundle\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Schema\Schema;
-use Jmleroux\TwitterExtractor\Core\TwitterReader;
-use Jmleroux\TwitterExtractor\Core\Saver;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * Store raw tweets in database.
- * This command should be run in a cron to regularly strore new tweets.
- * @author JM Leroux <jean-marie.leroux@akeneo.com>
+ * This command should be run in a cron to regularly store new tweets.
+ *
+ * @author JM Leroux <jmleroux.pro@gmail.com>
  */
 class InstallCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this->setName('jmleroux:twitter_extractor:install');
@@ -30,7 +30,6 @@ class InstallCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $database = $this->getContainer()->getParameter('database_name');
         $command = $this->getApplication()->find('doctrine:database:create');
         $command->run($input, $output);
 

@@ -12,10 +12,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Store raw tweets in database.
  * This command should be run in a cron to regularly strore new tweets.
- * @author JM Leroux <jean-marie.leroux@akeneo.com>
+ *
+ * @author JM Leroux <jmleroux.pro@gmail.com>
  */
 class TwitterStoreCommand extends ContainerAwareCommand
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this->setName('jmleroux:twitter:extract');
@@ -61,6 +65,12 @@ class TwitterStoreCommand extends ContainerAwareCommand
         return $this->getContainer()->get('jmleroux.twitter_extractor.saver');
     }
 
+    /**
+     * Write to console output and logger
+     *
+     * @param OutputInterface $output
+     * @param string          $message
+     */
     private function write(OutputInterface $output, $message)
     {
         $output->writeln($message);

@@ -2,7 +2,9 @@
 
 namespace Jmleroux\TwitterExtractor\Core;
 
-
+/**
+ * @author JM Leroux <jmleroux.pro@gmail.com>
+ */
 interface RepositoryInterface
 {
     /**
