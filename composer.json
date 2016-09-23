@@ -3,8 +3,12 @@
     "type": "project",
     "description": "Twitter extractor",
     "autoload": {
-        "psr-4": { "": "src/" },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "app/AppKernel.php"
+        ]
     },
     "require": {
         "php": ">=5.6",
