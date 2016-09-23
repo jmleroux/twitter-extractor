@@ -1,0 +1,20 @@
+services:
+    jmleroux.twitter_extractor.reader:
+        class: Jmleroux\TwitterExtractor\Core\TwitterReader
+        arguments:
+            -
+                oauth_access_token: '%twitter.oauth_access_token%'
+                oauth_access_token_secret: '%twitter.oauth_access_token_secret%'
+                consumer_key: '%twitter.consumer_key%'
+                consumer_secret: '%twitter.consumer_secret%'
+
+    jmleroux.twitter_extractor.saver:
+        class: Jmleroux\TwitterExtractor\Core\Saver
+        arguments:
+            - '@jmleroux.twitter_extractor.repository'
+
+    jmleroux.twitter_extractor.repository:
+        class: Jmleroux\TwitterExtractor\AppBundle\Repository\TwitterRepository
+        arguments:
+            - '@doctrine.dbal.default_connection'
+            - '%twitter.table%'
