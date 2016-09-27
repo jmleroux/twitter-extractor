@@ -14,6 +14,7 @@ set_time_limit(0);
 /**
  * @var Composer\Autoload\ClassLoader $loader
  */
+$loader = require_once __DIR__.'/../var/bootstrap.php.cache';
 $loader = require __DIR__.'/../app/autoload.php';
 
 $input = new ArgvInput();

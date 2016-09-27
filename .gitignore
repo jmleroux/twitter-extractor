@@ -1,3 +1,4 @@
+/app/config/parameters.yml
 /app/config/*_local.yml
 /var/*
 

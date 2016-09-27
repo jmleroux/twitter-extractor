@@ -14,6 +14,7 @@ services:
             - '@jmleroux.twitter_extractor.repository'
 
     jmleroux.twitter_extractor.repository:
+        private: true
         class: Jmleroux\TwitterExtractor\AppBundle\Repository\TwitterRepository
         arguments:
             - '@doctrine.dbal.default_connection'
