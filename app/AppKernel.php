@@ -19,7 +19,7 @@ class AppKernel extends Kernel
             new \Jmleroux\TwitterExtractor\AppBundle\AppBundle(),
         ];
 
-        if (in_array($this->getEnvironment(), ['dev', 'test'])) {
+        if (in_array($this->getEnvironment(), ['dev'])) {
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
         }

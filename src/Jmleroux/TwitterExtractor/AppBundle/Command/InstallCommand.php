@@ -3,7 +3,7 @@
 namespace Jmleroux\TwitterExtractor\AppBundle\Command;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Schema\Schema;
+use Jmleroux\TwitterExtractor\AppBundle\Installer\Db\Mysql;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -34,18 +34,12 @@ class InstallCommand extends ContainerAwareCommand
         $command->run($input, $output);
 
         $tweetsTable = $this->getContainer()->getParameter('twitter.table');
-        $schema = new Schema();
-
-        $table = $schema->createTable($tweetsTable);
-        $table->addColumn('id', 'string', ['length' => 50]);
-        $table->addColumn('content', 'text');
-        $table->setPrimaryKey(['id']);
 
         /** @var Connection $dbal */
         $dbal = $this->getContainer()->get('doctrine.dbal.default_connection');
-        $queries = $schema->toSql($dbal->getDatabasePlatform());
-
-        $dbal->executeQuery($queries[0]);
+        $dbCreator = new Mysql($dbal);
+        $createSql = $dbCreator->getCreateSql($tweetsTable);
+        $dbal->executeQuery($createSql);
 
         return 0;
     }
